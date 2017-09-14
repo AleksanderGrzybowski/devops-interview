@@ -5,3 +5,5 @@ ubuntu-xenial-*.log
 # Ansible
 *.retry
 
+# IntelliJ
+.idea/
