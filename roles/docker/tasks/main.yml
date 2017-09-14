@@ -1,0 +1,61 @@
+---
+- name: Install necessary packages for Docker
+  become: yes
+  apt:
+    update_cache: yes
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - apt-transport-https
+    - ca-certificates
+    - curl
+    - gnupg2
+    - software-properties-common
+    - python-docker
+
+- name: Add key for docker apt repository
+  become: yes
+  apt_key:
+    url: https://download.docker.com/linux/ubuntu/gpg
+
+- name: Add docker-engine apt repository
+  become: yes
+  apt_repository:
+    repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu xenial stable
+    state: present
+
+- name: Install docker-engine
+  become: yes
+  apt:
+    update_cache: yes
+    name: docker-ce
+    state: present
+
+- name: Ensure docker service is running
+  service:
+    name: docker
+    enabled: true
+    state: started
+
+- name: Ensure that Docker can run an image (step 1)
+  command: docker run --rm busybox echo Hello world
+  register: docker_test_output
+
+- name: Ensure that Docker can run an image (step 2)
+  assert:
+    that: 'docker_test_output.stdout == "Hello world"'
+    
+- name: Ensure that Docker Compose is installed
+  stat:
+    path: /usr/local/bin/docker-compose
+  register: docker_compose_stat
+
+- name: Install Docker Compose
+  become: yes
+  get_url: 
+    url: https://github.com/docker/compose/releases/download/1.16.1/docker-compose-Linux-x86_64 
+    dest: /usr/local/bin/docker-compose
+    mode: 0755
+  when: docker_compose_stat.stat.exists == False 
+    
+
