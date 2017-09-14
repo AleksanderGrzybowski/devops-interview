@@ -1,0 +1,7 @@
+# Vagrant
+ubuntu-xenial-*.log
+.vagrant/
+
+# Ansible
+*.retry
+
