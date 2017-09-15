@@ -1,4 +1,10 @@
 ---
+- name: Ensures docker configuration directory exists
+  become: yes
+  file: 
+    path: /etc/docker
+    state: directory
+    
 - name: Copy Docker config to allow insecure registry
   become: yes
   template:
