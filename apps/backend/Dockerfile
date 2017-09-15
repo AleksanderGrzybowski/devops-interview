@@ -5,5 +5,5 @@ WORKDIR /app
 
 RUN npm install
 
-ENV PORT 3000
+ENV PORT 3001
 CMD ["npm", "start"]
