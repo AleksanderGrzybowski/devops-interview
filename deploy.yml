@@ -1,0 +1,13 @@
+- hosts: vagrant
+  become: yes
+  tasks:
+    - name: Copy docker-compose.yml to remote
+      template:
+        src: docker-compose.yml
+        dest: /root/docker-compose.yml
+        
+    - name: Redeploy stack
+      command: docker stack deploy -c docker-compose.yml app-stack
+      args:
+        chdir: /root
+    

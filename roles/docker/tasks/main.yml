@@ -1,4 +1,10 @@
 ---
+- name: Copy Docker config to allow insecure registry
+  become: yes
+  template:
+    src: daemon.json
+    dest: /etc/docker/daemon.json
+    
 - name: Install necessary packages for Docker
   become: yes
   apt:
@@ -44,18 +50,4 @@
 - name: Ensure that Docker can run an image (step 2)
   assert:
     that: 'docker_test_output.stdout == "Hello world"'
-    
-- name: Ensure that Docker Compose is installed
-  stat:
-    path: /usr/local/bin/docker-compose
-  register: docker_compose_stat
-
-- name: Install Docker Compose
-  become: yes
-  get_url: 
-    url: https://github.com/docker/compose/releases/download/1.16.1/docker-compose-Linux-x86_64 
-    dest: /usr/local/bin/docker-compose
-    mode: 0755
-  when: docker_compose_stat.stat.exists == False 
-    
 

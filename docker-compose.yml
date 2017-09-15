@@ -1,0 +1,29 @@
+version: '3.1'
+services:
+  frontend:
+    image: {{ registry }}/frontend:latest
+    ports:
+      - 80:80
+    environment:
+      - BACKEND_URL=http://{{ backend_host }}:{{ backend_port }}
+    deploy:
+      replicas: 2
+      restart_policy:
+        condition: any
+        delay: 10s
+  backend:
+    image: {{ registry }}/backend:latest
+    ports:
+      - {{ backend_port }}:{{ backend_port }}
+    volumes:
+      - backend_data:/var/lib/database
+    environment:
+      - PORT={{ backend_port }}
+    deploy:
+      replicas: 2 
+      restart_policy:
+        condition: any
+        delay: 10s
+              
+volumes:
+  backend_data:

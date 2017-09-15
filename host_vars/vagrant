@@ -1,0 +1,4 @@
+---
+registry: 139.59.143.165:5000
+backend_host: 192.168.33.10
+backend_port: 3000
