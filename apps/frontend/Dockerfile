@@ -10,7 +10,8 @@ FROM httpd:2.2-alpine
 ENV BACKEND_URL ___change_me___
 
 COPY --from=0 /frontend/build/ /usr/local/apache2/htdocs/
-COPY run.sh /
+COPY docker-entrypoint.sh /
 
 WORKDIR /
-CMD ./run.sh
+ENTRYPOINT /docker-entrypoint.sh
+
