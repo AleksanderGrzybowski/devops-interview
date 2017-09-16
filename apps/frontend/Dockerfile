@@ -1,11 +1,11 @@
-FROM node:8.4.0
+FROM node:8.5.0
 
 COPY . /frontend
 WORKDIR /frontend
 RUN npm install && npm run build
 
 
-FROM httpd:latest
+FROM httpd:2.2-alpine
 
 ENV BACKEND_URL ___change_me___
 
