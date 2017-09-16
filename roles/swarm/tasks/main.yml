@@ -6,7 +6,6 @@
   changed_when: False
   
 - name: Initialize new swarm
-  become: yes
   command: docker swarm init --advertise-addr=127.0.0.1
   when: docker_node_ls_result.rc != 0
 

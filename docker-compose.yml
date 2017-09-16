@@ -11,6 +11,7 @@ services:
       restart_policy:
         condition: any
         delay: 10s
+        
   backend:
     image: {{ registry }}/backend:latest
     ports:
