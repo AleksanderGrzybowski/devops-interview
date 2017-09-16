@@ -7,6 +7,3 @@ ubuntu-xenial-*.log
 
 # IntelliJ
 .idea/
-
-# NodeJS
-node_modules/

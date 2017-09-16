@@ -10,7 +10,7 @@ Vagrant.configure("2") do |config|
   end
 
   config.vm.provision "shell" do |shell|
-    ssh_pub_key = File.readlines("public_key").first.strip
+    ssh_pub_key = File.readlines("ssh_keys/public_key").first.strip
 
     shell.inline = <<-SHELL
       echo #{ssh_pub_key} >> /home/ubuntu/.ssh/authorized_keys
