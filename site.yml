@@ -1,6 +1,7 @@
 - hosts: vagrant
   become: yes
   roles:
+    - ufw
     - docker
     - swarm
     

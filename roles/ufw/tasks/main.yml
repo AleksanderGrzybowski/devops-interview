@@ -1,0 +1,20 @@
+---
+- name: Install UFW
+  apt:
+    name: ufw
+    state: present
+  
+- name: Allow only ssh and frontend/backend application ports
+  ufw:
+    rule: allow
+    port: "{{ item }}"
+    proto: tcp
+  with_items:
+    - 22
+    - 80
+    - "{{ backend_port }}"
+    
+- name: Enable firewall
+  ufw:
+    state: enabled
+    policy: deny
