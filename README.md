@@ -1,4 +1,8 @@
-# Solution to the assignment
+# What is this?
+
+This is a coding task I was given, when I was interviewing for DevOps Engineer position. This task is very generic, technology agnostic (everything runs in Docker) and not relevant to that company's business, so I assume it's safe to publish it. However, if you work there and have any objections, feel free to contact me, so I can obfuscate it further.
+
+# Solution
 
 Almost everything is automated. To boot up and provision new Ubuntu virtual machine,
 
